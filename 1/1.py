@@ -1,9 +1,9 @@
+# didn't clean up or refactor, not sure if it works, also it's not the best implementation closer to garbage and lucky that it worked
 X = [l.strip() for l in open('1-input-test')]
 
 numbers = {'one': '1', 'two': '2', 'three':'3', 'four':'4', 'five':'5', 'six':'6', 'seven':'7', 'eight':'8', 'nine':'9'}
 
 # preprocessing
-# didn't clean up or refactor, not sure if it works, also it's not the best implementation
 
 new_x_forward = []
 new_x_backward = []
