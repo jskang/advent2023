@@ -10,12 +10,10 @@ part2_sum = 0
 
 for i in range(len(X)):
     win, number = X[i].split(':')[1].split('|')
-    win = win.split()
-    number = number.split()
+    win = set(win.split())
+    number = set(number.split())
 
-    win_set = set(win)
-    number_set = set(number)
-    win_count = len(win_set.intersection(number_set))
+    win_count = len(win.intersection(number))
 
     # part1: Calculate points
     if win_count:
