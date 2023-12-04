@@ -10,7 +10,7 @@ tests = [[1,-1], [1,0], [1,1],
          [0,-1],          [0,1],
          [-1,-1], [-1, 0], [-1,1]]
 
-def CheckSymbol(X, i, j):
+def checkSymbol(X, i, j):
     for t in tests:
         i_test = i + t[0]
         j_test = j + t[1]
@@ -25,7 +25,7 @@ def CheckSymbol(X, i, j):
 
     return False
 
-def GetStarLocation(X, i, j):
+def getStarLocation(X, i, j):
     gear_list = []
     for t in tests:
         i_test = i + t[0]
@@ -61,10 +61,10 @@ for i in range(len(X)):
 
             # If a number is found go to the end of the number and process everything all at once
             while j_search < len(X[i]) and X[i][j_search].isdigit():
-                if CheckSymbol(X, i, j_search) is True:
+                if checkSymbol(X, i, j_search) is True:
                     valid = True
 
-                for g in GetStarLocation(X, i, j_search):
+                for g in getStarLocation(X, i, j_search):
                     gear_list.append(g)
 
                 number = number + X[i][j_search]

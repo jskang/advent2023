@@ -10,7 +10,7 @@ tests = [[1,-1], [1,0], [1,1],
          [0,-1],          [0,1],
          [-1,-1], [-1, 0], [-1,1]]
 
-def CheckSymbol(X, i, j):
+def checkSymbol(X, i, j):
     for t in tests:
         i_test = i + t[0]
         j_test = j + t[1]
@@ -25,7 +25,7 @@ def CheckSymbol(X, i, j):
 
     return False
 
-def GetStarLocation(X, i, j):
+def getStarLocation(X, i, j):
     star_list = []
     for t in tests:
         i_test = i + t[0]
@@ -58,10 +58,10 @@ for i in range(len(X)):
         if j < len(X[i]) and X[i][j].isdigit():
             number += X[i][j]
 
-            if CheckSymbol(X, i, j) is True:
+            if checkSymbol(X, i, j) is True:
                 valid = True
             
-            for g in GetStarLocation(X, i, j):
+            for g in getStarLocation(X, i, j):
                 gear_list.append(g)
 
         elif number:
