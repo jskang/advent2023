@@ -25,7 +25,7 @@ def CheckSymbol(X, i, j):
 
     return False
 
-def CheckGear(X, i, j):
+def GetStarLocation(X, i, j):
     gear_list = []
     for t in tests:
         i_test = i + t[0]
@@ -64,7 +64,7 @@ for i in range(len(X)):
                 if CheckSymbol(X, i, j_search) is True:
                     valid = True
 
-                for g in CheckGear(X, i, j_search):
+                for g in GetStarLocation(X, i, j_search):
                     gear_list.append(g)
 
                 number = number + X[i][j_search]
