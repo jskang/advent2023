@@ -19,7 +19,7 @@ for i in range(len(X)):
     # Calculate points for part 1
     points = 0
     if len(winning_numbers):
-        points = pow(2, len(winning_numbers)- 1)
+        points = pow(2, len(winning_numbers) - 1)
 
     # Since you're processing the card, you must have one card
     card_counter [i] += 1
