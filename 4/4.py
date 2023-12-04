@@ -29,8 +29,5 @@ for i in range(len(X)):
         if win_pos < len(X):
             card_counter[win_pos] += card_counter[i]
 
-for k,v in card_counter.items():
-    part2_sum += v 
-
 print(part1_sum)
-print(part2_sum)
+print(sum(card_counter.values()))
