@@ -18,7 +18,7 @@ for i in range(len(X)):
     winning_num = win_set.intersection(num_set)
     points = 0
 
-    # Calculate points
+    # Calculate points for part 1
     for j in range(len(winning_num)):
         if j == 0:
             points = 1
@@ -28,8 +28,8 @@ for i in range(len(X)):
     # Since you're processing the card, you must have one card
     card_counter [i] += 1
 
-    for s in range(len(winning_num)):
-        win_pos = i + s + 1
+    for j in range(len(winning_num)):
+        win_pos = i + j + 1
         if win_pos < len(X):
             card_counter[win_pos] += card_counter[i]
     
