@@ -22,7 +22,7 @@ for i in range(len(X)):
         points = pow(2, len(winning_numbers) - 1)
 
     # Since you're processing the card, you must have one card
-    card_counter [i] += 1
+    card_counter[i] += 1
     for j in range(len(winning_numbers)):
         win_pos = i + j + 1
         if win_pos < len(X):
