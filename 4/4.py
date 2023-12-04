@@ -13,8 +13,8 @@ for i in range(len(X)):
     number = number.split()
 
     win_set = set(win)
-    num_set = set(number)
-    winning_numbers = win_set.intersection(num_set)
+    number_set = set(number)
+    winning_numbers = win_set.intersection(number_set)
 
     # Calculate points for part 1
     points = 0
