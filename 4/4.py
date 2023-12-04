@@ -9,8 +9,8 @@ part1_sum = 0
 
 for i in range(len(X)):
     win, number = X[i].split(':')[1].split('|')
-    win = [w.strip() for w in win.strip().split(' ') if w]
-    number = [n.strip() for n in number.strip().split(' ') if n ]
+    win = win.split()
+    number = number.split()
 
     win_set = set(win)
     num_set = set(number)
@@ -19,12 +19,9 @@ for i in range(len(X)):
     points = 0
 
     # Calculate points for part 1
-    for j in range(len(winning_num)):
-        if j == 0:
-            points = 1
-        else:
-            points *= 2
-    
+    if len(winning_num):
+        points = pow(2, len(winning_num)- 1)
+
     # Since you're processing the card, you must have one card
     card_counter [i] += 1
 
@@ -35,9 +32,10 @@ for i in range(len(X)):
     
     part1_sum += points 
 
+print(part1_sum)
+
 part2_sum = 0
 for k,v in card_counter.items():
     part2_sum += v 
 
-print(part1_sum)
 print(part2_sum)
