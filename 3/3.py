@@ -25,8 +25,8 @@ def CheckSymbol(X, i, j):
 
     return False
 
-def GetStarLocation(X, i, j):
-    star_list = []
+def CheckGear(X, i, j):
+    gear_list = []
     for t in tests:
         i_test = i + t[0]
         j_test = j + t[1]
@@ -37,9 +37,9 @@ def GetStarLocation(X, i, j):
         test_value = X[i_test][j_test]
 
         if test_value == '*':
-            star_list.append((i_test, j_test))
+            gear_list.append((i_test, j_test))
 
-    return star_list
+    return gear_list
 
 
 gear_map = collections.defaultdict(list)
@@ -47,33 +47,36 @@ total_part_1 = 0
 total_part_2 = 0
 
 for i in range(len(X)):
-    number = ''
-    valid = False
-    gear_list = []
+    skip_counter = 0
+    for j in range(len(X[i])):
+        if skip_counter > 0:
+            skip_counter -= 1
+            continue 
 
-    # Run the loop one more time to cover cases where the row ends with a number
-    # Add length check before indexing with `and` to prevent index out of bounds
-    # Keep the numbers as string
-    for j in range(len(X[i]) + 1):
-        if j < len(X[i]) and X[i][j].isdigit():
-            number += X[i][j]
+        if X[i][j].isdigit():
+            j_search = j 
+            number = ''
+            valid = False
+            gear_list = list()
 
-            if CheckSymbol(X, i, j) is True:
-                valid = True
-            
-            for g in GetStarLocation(X, i, j):
-                gear_list.append(g)
+            # If a number is found go to the end of the number and process everything all at once
+            while j_search < len(X[i]) and X[i][j_search].isdigit():
+                if CheckSymbol(X, i, j_search) is True:
+                    valid = True
 
-        elif number:
+                for g in CheckGear(X, i, j_search):
+                    gear_list.append(g)
+
+                number = number + X[i][j_search]
+
+                skip_counter += 1
+                j_search += 1
+
             if valid:
                 total_part_1 += int(number)
 
             for s in set(gear_list):
                 gear_map[s].append(int(number))           
-
-            number = ''
-            valid = False
-            gear_list = []
 
 for k, v in gear_map.items():
     if len(v) == 2:
