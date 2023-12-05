@@ -59,8 +59,6 @@ for seed in seeds:
 print('part1: ', mininum_location)
 
 
-
-
 # reverse and brute force
 # time python3 5.py
 # real    16m28.879s
