@@ -20,7 +20,7 @@ for i in range(len(X)):
         part1_sum += pow(2, win_count - 1)
 
     # part2:
-    # Since you're processing the card, you must have one card
+    # Since you're processing the game, you must add one game to the count
     card_counter[i] += 1
     for j in range(win_count):
         win_pos = i + j + 1
