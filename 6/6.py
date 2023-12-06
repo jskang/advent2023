@@ -37,4 +37,5 @@ for search_order in [range(allowed_time), reversed(range(allowed_time))]:
             results.append(acc_time)
             break
     
+# Do a +1 to include the lowest number in the interval since we are subtracting
 print('part2: ', results[1] - results[0] + 1)
