@@ -27,15 +27,14 @@ print('part1: ', sum_total)
 
 # part 2
 allowed_time = j_time + 1
-results = []
-for search_order in [range(allowed_time), reversed(range(allowed_time))]:
-    for acc_time in search_order:
-        coast_time = j_time - acc_time
-        coast_distance = coast_time * acc_time
+results = 0
+for acc_time in range(allowed_time):
+    coast_time = j_time - acc_time
+    coast_distance = coast_time * acc_time
 
-        if coast_distance > j_distance:
-            results.append(acc_time)
-            break
-    
-# Do a +1 to include the lowest number in the interval since we are subtracting
-print('part2: ', results[1] - results[0] + 1)
+    if coast_distance > j_distance:
+        results = acc_time
+        break
+
+# since the solution is mirrored, you only have to do one side
+print('part2: ', (allowed_time - 2 * results))
