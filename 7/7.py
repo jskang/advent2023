@@ -10,7 +10,6 @@ joker_map = {x: i for i, x in enumerate("AKQT98765432J")}
 # strength goes from 6 to 0
 def get_card_strength(cards):
     card_set = set(cards)
-    char_map = collections.defaultdict(int)
     chars = collections.Counter(cards)
 
     # high card
