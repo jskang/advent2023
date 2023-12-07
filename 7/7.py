@@ -20,21 +20,8 @@ card_map = {
     '2': 2
 }
 
-joker_card_map = {
-    'T': 10,
-    'J': 1,
-    'Q': 12,
-    'K': 13,
-    'A': 14,
-    '9': 9,
-    '8': 8,
-    '7': 7,
-    '6': 6,
-    '5': 5,
-    '4': 4,
-    '3': 3,
-    '2': 2
-}
+joker_card_map = card_map.copy()
+joker_card_map['J'] = 1
 
 # strength goes from 6 to 0
 def get_card_strength(cards):
@@ -75,7 +62,7 @@ def joker_converter(cards, card_map):
     
     num_js = char_map.pop('J', 0)
 
-    # Find the max key
+    # Find the max 
     highest_num = max(char_map.values())
     highest_pairs = [k for k,v in char_map.items() if v == highest_num]
     highest_pair_nums = [card_map[p] for p in highest_pairs]    
