@@ -62,10 +62,12 @@ for x in X:
     new_cards = joker_converter(old_cards, joker_map)
     new_strength = get_card_strength(new_cards)
 
+    # Part 1
     normal_map_values = [card_map[c] for c in old_cards]
-    joker_map_values = [joker_map[c] for c in old_cards]
-
     type_list_p1[old_strength].append((normal_map_values, bet))
+
+    # Part 2
+    joker_map_values = [joker_map[c] for c in old_cards]
     type_list_p2[new_strength].append((joker_map_values, bet))
 
 organized_list_p1 = [l for li in type_list_p1 for l in sorted(li, reverse=True) if l]
