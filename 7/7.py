@@ -4,24 +4,8 @@ X_test = [l.strip() for l in open('7-input-test')]
 
 X = X_real
 
-card_map = {
-    'T': 10,
-    'J': 11,
-    'Q': 12,
-    'K': 13,
-    'A': 14,
-    '9': 9,
-    '8': 8,
-    '7': 7,
-    '6': 6,
-    '5': 5,
-    '4': 4,
-    '3': 3,
-    '2': 2
-}
-
-joker_card_map = card_map.copy()
-joker_card_map['J'] = 1
+card_map = {x: i for i, x in enumerate("AKQJT98765432")}
+joker_map = {x: i for i, x in enumerate("AKQ{T98765432J")}
 
 # strength goes from 6 to 0
 def get_card_strength(cards):
@@ -73,27 +57,6 @@ def joker_converter(cards, card_map):
 
     return(new_cards)
     
-def add_to_hand_list(cards, strength, type_list, card_map):
-    sub_list = type_list[strength]
-    len_sl = len(sub_list)
-    replace = False
-    if len_sl > 0:
-        for i in range(len_sl):
-            sorted_cards, _ = sub_list[i] 
-            for ci in range(len(sorted_cards)):
-                if card_map[sorted_cards[ci]] > card_map[cards[ci]]:
-                    break
-                elif card_map[cards[ci]] > card_map[sorted_cards[ci]]:
-                    replace = True
-                    break
-            if replace:
-                sub_list.insert(i, (cards, bet))
-                break
-        if replace is False:
-            sub_list.append((cards, bet))
-    else:
-        sub_list.append((old_cards, bet))
-
 type_list_p1 = [[] for i in range(7)]
 type_list_p2 = [[] for i in range(7)]
 
@@ -101,14 +64,17 @@ for x in X:
     old_cards, bet = x.split()
     old_strength = get_card_strength(old_cards)
 
-    new_cards = joker_converter(old_cards, card_map)
+    new_cards = joker_converter(old_cards, joker_map)
     new_strength = get_card_strength(new_cards)
 
-    add_to_hand_list(old_cards, old_strength, type_list_p1, card_map)
-    add_to_hand_list(old_cards, new_strength, type_list_p2, joker_card_map)
+    normal_map_values = [card_map[c] for c in old_cards]
+    joker_map_values = [joker_map[c] for c in old_cards]
 
-organized_list_p1 = [l for li in type_list_p1 for l in reversed(li) if l]
-organized_list_p2 = [l for li in type_list_p2 for l in reversed(li) if l]
+    type_list_p1[old_strength].append((normal_map_values, bet))
+    type_list_p2[new_strength].append((joker_map_values, bet))
+
+organized_list_p1 = [l for li in type_list_p1 for l in sorted(li, reverse=True) if l]
+organized_list_p2 = [l for li in type_list_p2 for l in sorted(li, reverse=True) if l]
 
 part1_sum = 0
 part2_sum = 0
