@@ -67,19 +67,33 @@ print('part1: ', mininum_location)
 found = False
 # We know the answer, for demonstration use the higher location
 # location = 27992000 
-location = 0
-while found is False:
-    location += 1
-    tracker = location
-    for mapping in reversed(full_map):
-        for sl in mapping:
-            if tracker <= sl[0] + sl[2] - 1 and tracker >= sl[0]:
-                tracker = sl[1] + (tracker - sl[0])
-                break
+# location = 0
+# while found is False:
+#     location += 1
+#     tracker = location
+#     for mapping in reversed(full_map):
+#         for sl in mapping:
+#             if tracker <= sl[0] + sl[2] - 1 and tracker >= sl[0]:
+#                 tracker = sl[1] + (tracker - sl[0])
+#                 break
     
-    for i in range(0, len(seeds), 2):
-        lb = seeds[i]
-        ub = seeds[i + 1]
-        if tracker >= lb and tracker < lb + ub:
-            print('part2: ', location)
-            found = True
+#     for i in range(0, len(seeds), 2):
+#         lb = seeds[i]
+#         ub = seeds[i + 1]
+#         if tracker >= lb and tracker < lb + ub:
+#             print('part2: ', location)
+#             found = True
+
+range_map = [(X[i], X[i+1]) for i in range(0, len(seeds), 2)]
+
+
+for mapping in full_map:
+    new_range = []
+    for dest, source, n in mapping:
+        for range_start, range_end in range_map:
+            if source + n > range_end and source <= range_start: 
+                new_range.append((range_start, range_end))
+            elif 
+
+# calculate the interval based on mapping
+# Find the range that overlaps between range_map, and for the ones that don't create a new range

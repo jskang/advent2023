@@ -71,15 +71,14 @@ for x in X:
     joker_map_values = [joker_map[c] for c in cards]
     type_list_p2[new_strength].append((joker_map_values, bet))
 
-organized_list_p1 = [l for li in type_list_p1 for l in sorted(li, reverse=True) if l]
-organized_list_p2 = [l for li in type_list_p2 for l in sorted(li, reverse=True) if l]
+part_sum = []
+for i, tl in enumerate([type_list_p1, type_list_p2]):
+    part_sum = 0
+    organized_list = [l for li in tl for l in sorted(li, reverse=True) if l]
 
-part1_sum = 0
-part2_sum = 0
-for l in range(len(organized_list_p1)):
-    rank = l + 1
-    part1_sum += int(organized_list_p1[l][1]) * rank
-    part2_sum += int(organized_list_p2[l][1]) * rank
-
-print('part1: ', part1_sum)
-print('part2: ', part2_sum)
+    for l in range(len(organized_list)):
+        rank = l + 1
+        part_sum += int(organized_list[l][1]) * rank
+    
+    print('part{}: '.format(i + 1), part_sum)
+    
