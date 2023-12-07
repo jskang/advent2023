@@ -7,31 +7,12 @@ X = X_real
 card_map = {x: i for i, x in enumerate(reversed("AKQJT98765432"))}
 joker_map = {x: i for i, x in enumerate(reversed("AKQT98765432J"))}
 
-# strength goes from 0(High) to 6(Five of a kind)
-# Could be replaced by some entropy metric, the higher the entropy the lower the hand
-# We don't need to know what the hand is, we only need to know their relative strength
+# reddit:
+# Find the count of the card that appears the most times and subtract the amount of different cards
+# Thie works because we don't care what the hand is, we just care about the relative strength
 def get_card_strength(cards):
     chars = collections.Counter(cards)
-    num_labels = len(chars)
-
-    # high card
-    if num_labels == 5:
-        return 0
-    # one pair
-    elif num_labels == 4:
-        return 1
-    # two pair and three of a kind
-    elif num_labels == 3:
-        if max(chars.values()) == 3:
-            return 3
-        return 2
-    # full house or four of a kind
-    elif num_labels == 2:
-        if max(chars.values()) == 4:
-            return 5
-        return 4
-    # five of a kind
-    return 6
+    return max(chars.values()) - len(chars)
 
 def joker_converter(cards, card_map):
     if 'J' not in cards: 
