@@ -7,29 +7,29 @@ X = X_real
 card_map = {x: i for i, x in enumerate("AKQJT98765432")}
 joker_map = {x: i for i, x in enumerate("AKQT98765432J")}
 
-# strength goes from 6 to 0
+# strength goes from 6(High) to 0(Five of a kind)
 def get_card_strength(cards):
     card_set = set(cards)
     chars = collections.Counter(cards)
 
     # high card
     if len(card_set) == 5:
-        return 0
+        return 6
     # one pair
     elif len(card_set) == 4:
-        return 1
+        return 5 
     # two pair and three of a kind
     elif len(card_set) == 3:
         if max(chars.values()) == 3:
             return 3
-        return 2
+        return 4
     # full house or four of a kind
     elif len(card_set) == 2:
         if max(chars.values()) == 4:
-            return 5
-        return 4
+            return 1
+        return 2
     # five of a kind
-    return 6
+    return 0
 
 def joker_converter(cards, card_map):
     if 'J' not in cards: 
@@ -53,8 +53,8 @@ def joker_converter(cards, card_map):
     return new_cards
     
 # 7 types of hands are present
-type_list_p1 = [[] for i in range(7)]
-type_list_p2 = [[] for i in range(7)]
+type_list_p1 = []
+type_list_p2 = []
 
 for x in X:
     cards, bet = x.split()
@@ -65,20 +65,19 @@ for x in X:
 
     # Part 1
     normal_map_values = [card_map[c] for c in cards]
-    type_list_p1[original_strength].append((normal_map_values, bet))
+    type_list_p1.append((original_strength, normal_map_values, bet))
 
     # Part 2
     joker_map_values = [joker_map[c] for c in cards]
-    type_list_p2[new_strength].append((joker_map_values, bet))
-
+    type_list_p2.append((new_strength, joker_map_values, bet))
+    
 part_sum = []
 for i, tl in enumerate([type_list_p1, type_list_p2]):
     part_sum = 0
-    organized_list = [l for li in tl for l in sorted(li, reverse=True) if l]
-
+    organized_list = sorted(tl, reverse=True)
     for l in range(len(organized_list)):
         rank = l + 1
-        part_sum += int(organized_list[l][1]) * rank
-    
+        part_sum += int(organized_list[l][-1]) * rank
+
     print('part{}: '.format(i + 1), part_sum)
     
