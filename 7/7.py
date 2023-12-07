@@ -4,41 +4,43 @@ X_test = [l.strip() for l in open('7-input-test')]
 
 X = X_real
 
-card_map = {x: i for i, x in enumerate("AKQJT98765432")}
-joker_map = {x: i for i, x in enumerate("AKQT98765432J")}
+card_map = {x: i for i, x in enumerate(reversed("AKQJT98765432"))}
+joker_map = {x: i for i, x in enumerate(reversed("AKQT98765432J"))}
 
-# strength goes from 6(High) to 0(Five of a kind)
+# strength goes from 0(High) to 6(Five of a kind)
+# Could be replaced by some entropy metric, the higher the entropy the lower the hand
+# We don't need to know what the hand is, we only need to know their relative strength
 def get_card_strength(cards):
-    card_set = set(cards)
     chars = collections.Counter(cards)
+    num_labels = len(chars)
 
     # high card
-    if len(card_set) == 5:
-        return 6
+    if num_labels == 5:
+        return 0
     # one pair
-    elif len(card_set) == 4:
-        return 5 
+    elif num_labels == 4:
+        return 1
     # two pair and three of a kind
-    elif len(card_set) == 3:
+    elif num_labels == 3:
         if max(chars.values()) == 3:
             return 3
-        return 4
-    # full house or four of a kind
-    elif len(card_set) == 2:
-        if max(chars.values()) == 4:
-            return 1
         return 2
+    # full house or four of a kind
+    elif num_labels == 2:
+        if max(chars.values()) == 4:
+            return 5
+        return 4
     # five of a kind
-    return 0
+    return 6
 
 def joker_converter(cards, card_map):
     if 'J' not in cards: 
         return cards
     
-    if 'J' in cards and len(set(cards)) == 1:
-        return cards
-    
     chars = collections.Counter(cards)
+
+    if 'J' in cards and len(chars) == 1:
+        return cards
     
     del chars['J']
     # Find the cards with the most occurences
@@ -71,10 +73,9 @@ for x in X:
     joker_map_values = [joker_map[c] for c in cards]
     type_list_p2.append((new_strength, joker_map_values, bet))
     
-part_sum = []
 for i, tl in enumerate([type_list_p1, type_list_p2]):
     part_sum = 0
-    organized_list = sorted(tl, reverse=True)
+    organized_list = sorted(tl)
     for l in range(len(organized_list)):
         rank = l + 1
         part_sum += int(organized_list[l][-1]) * rank
