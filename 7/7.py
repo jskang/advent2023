@@ -42,10 +42,12 @@ def joker_converter(cards, card_map):
     chars = collections.Counter(cards)
     
     del chars['J']
-    # Find the max 
+    # Find the cards with the most occurences
     list_of_pairs = chars.most_common(1)
-    highest_pairs = [(card_map[k], k) for k, _ in list_of_pairs]
-    to_replace = sorted(highest_pairs)[0][1]
+    # Map card label a strength/map
+    max_num_label = [(card_map[k], k) for k, _ in list_of_pairs]
+    # Sort it and pick the highest label card
+    to_replace = sorted(max_num_label)[0][1]
 
     new_cards = cards.replace('J', to_replace)
 
