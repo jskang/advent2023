@@ -61,8 +61,8 @@ for x in X:
     old_cards, bet = x.split()
     old_strength = get_card_strength(old_cards)
 
-    new_cards = joker_converter(old_cards, joker_map)
-    new_strength = get_card_strength(new_cards)
+    joker_cards = joker_converter(old_cards, joker_map)
+    new_strength = get_card_strength(joker_cards)
 
     # Part 1
     normal_map_values = [card_map[c] for c in old_cards]
