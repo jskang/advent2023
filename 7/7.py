@@ -50,7 +50,7 @@ def joker_converter(cards, card_map):
 
     new_cards = cards.replace('J', to_replace)
 
-    return(new_cards)
+    return new_cards
     
 # 7 types of hands are present
 type_list_p1 = [[] for i in range(7)]
