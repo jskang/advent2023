@@ -11,8 +11,7 @@ joker_map = {x: i for i, x in enumerate("AKQT98765432J")}
 def get_card_strength(cards):
     card_set = set(cards)
     char_map = collections.defaultdict(int)
-    for c in cards:
-        char_map[c] += 1
+    chars = collections.Counter(cards)
 
     # high card
     if len(card_set) == 5:
@@ -22,12 +21,12 @@ def get_card_strength(cards):
         return 1
     # two pair and three of a kind
     elif len(card_set) == 3:
-        if max(char_map.values()) >= 3:
+        if max(chars.values()) == 3:
             return 3
         return 2
     # full house or four of a kind
     elif len(card_set) == 2:
-        if max(char_map.values()) >= 4:
+        if max(chars.values()) == 4:
             return 5
         return 4
     # five of a kind
@@ -40,18 +39,13 @@ def joker_converter(cards, card_map):
     if 'J' in cards and len(set(cards)) == 1:
         return cards
     
-    char_map = collections.defaultdict(int)
-    for c in cards:
-        char_map[c] += 1   
+    chars = collections.Counter(cards)
     
-    num_js = char_map.pop('J', 0)
-
+    del chars['J']
     # Find the max 
-    highest_num = max(char_map.values())
-    highest_pairs = [k for k,v in char_map.items() if v == highest_num]
-    highest_pair_nums = [card_map[p] for p in highest_pairs]    
-
-    to_replace = str(highest_pairs[highest_pair_nums.index(max(highest_pair_nums))])
+    list_of_pairs = chars.most_common(1)
+    highest_pairs = [(card_map[k], k) for k, _ in list_of_pairs]
+    to_replace = sorted(highest_pairs)[0][1]
 
     new_cards = cards.replace('J', to_replace)
 
