@@ -1,3 +1,4 @@
+import math
 import collections
 X_real= [l.strip() for l in open('6-input')]
 X_test = [l.strip() for l in open('6-input-test')]
@@ -35,6 +36,20 @@ for acc_time in range(allowed_time):
     if coast_distance > j_distance:
         results = acc_time
         break
-
 # since the solution is mirrored, you only have to do one side
 print('part2: ', (allowed_time - 2 * results))
+
+# quadratic_formula way
+# acc_time = x
+# 
+# j_distance = (j_time - acc_time) * acc_time
+# j_distance = -acc_time^2 + j_time * acc_time
+# 0 = acc_time ^2 - j_time * acc_time + j_distance
+# 0 = 1(x^2) - j_time(x) +j_distance 
+# (-(-j_time) +/- sqrt((j_time)^2 - 4 * 1 * j_distance)) / 2 * 1
+# (j_time +/- sqrt(j_time**2 - 4*j_distance)) /2
+# root1 = math.floor((j_time + math.sqrt(pow(j_time, 2) - 4 * j_distance))) // 2
+# root2 = math.ceil((j_time - math.sqrt(pow(j_time, 2) - 4 * j_distance))) // 2
+# difference between root1 and root2
+
+print('part2 quadratic formula: ', int(math.sqrt(pow(j_time, 2) - 4 * j_distance)))
