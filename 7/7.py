@@ -132,7 +132,3 @@ for l in range(len(organized_list_p1)):
 
 print('part1: ', part1_sum)
 print('part2: ', part2_sum)
-
-
-
-
