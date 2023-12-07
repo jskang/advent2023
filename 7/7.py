@@ -5,7 +5,7 @@ X_test = [l.strip() for l in open('7-input-test')]
 X = X_real
 
 card_map = {x: i for i, x in enumerate("AKQJT98765432")}
-joker_map = {x: i for i, x in enumerate("AKQ{T98765432J")}
+joker_map = {x: i for i, x in enumerate("AKQT98765432J")}
 
 # strength goes from 6 to 0
 def get_card_strength(cards):
@@ -57,6 +57,7 @@ def joker_converter(cards, card_map):
 
     return(new_cards)
     
+# 7 types of hands are present
 type_list_p1 = [[] for i in range(7)]
 type_list_p2 = [[] for i in range(7)]
 
