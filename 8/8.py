@@ -26,9 +26,7 @@ def count_to_end(mapping, start_node_list, end_regex):
         count = 0
         cn = node
         nn = ''
-        while True:
-            if re.search(end_regex, nn):
-                break
+        while not re.search(end_regex, nn):
             for i in instruction:
                 count += 1
                 index = 0 if i == "L" else 1
