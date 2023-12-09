@@ -20,7 +20,7 @@ part_2_sum = 0
 for x in X:
     row = [int(xp) for xp in x.split()]
     part_1_sum += get_prediction(row)
-    part_2_sum += get_prediction(list(reversed(row)))
+    part_2_sum += get_prediction(row[::-1])
 
 print('part 1:', part_1_sum)
 print('part 2:', part_2_sum)
