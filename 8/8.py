@@ -22,11 +22,9 @@ def produce_mapping(nodes, re_start, re_nodes):
 
 def count_to_end(mapping, start_node_list, end_regex):
     answer = []
-    start_nodes = [mapping[n] for n in start_node_list ]
-    for node in start_nodes:
+    for nn in start_node_list:
         count = 0
-        cn = node
-        nn = ''
+        cn = mapping[nn]
         while not re.search(end_regex, nn):
             for i in instruction:
                 count += 1
