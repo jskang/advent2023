@@ -85,15 +85,43 @@ found = False
 #             found = True
 
 range_map = [(X[i], X[i+1]) for i in range(0, len(seeds), 2)]
+queue = range_map
 
 
 for mapping in full_map:
     new_range = []
-    for dest, source, n in mapping:
-        for range_start, range_end in range_map:
-            if source + n > range_end and source <= range_start: 
-                new_range.append((range_start, range_end))
-            elif 
+    while len(queue):
+        range_start, range_end = queue.pop()
+        for dest, source, n in mapping:
+            source_start = source
+            source_end = source + n
+            mapping = dest - source 
 
+            if source_end > range_end and source_start <= range_start: 
+                # range:             |<--1-->|
+                # source:        |<------------->|
+                new_range.append((range_start + mapping, range_end + mapping))
+                break
+            if range_end > source_end and range_start <= source_start:
+                # range:   |<-1->|<------2------>|<-3->|
+                # source:        |<------------->|
+                # map part 2 to dest by adding the diff between dest and source
+                # put part 1, and part 3 into queue
+                # calculate the mapping diff
+                # part 2
+                new_range.append((source_start + mapping, source_end + mapping))
+                # part 1
+                queue.append((range_start, source_start))
+                # part 3
+                queue.append((source_end, range_end))
+            if range_end > source_end and range_start <= source_start:
+                # range:   |<-1->|<-2->|
+                # source:        |<------------->|
+            if range_end > source_end and range_start <= source_start:
+                # range:                   |<-1->|<-2->|
+                # source:        |<------------->|           
+            if range_end > source_end and range_start <= source_start:
+                # range:  |<-1->|         or          |<-1->|              
+                # source:          |<------------->|           
 # calculate the interval based on mapping
 # Find the range that overlaps between range_map, and for the ones that don't create a new range
