@@ -45,9 +45,7 @@ parts_arg = [
     (part2_mapping, part2_start_list, '[0-9A-Z]{2}Z')
 ]
 
-parts_answer = []
-for mapping, start_nodes_list, end_regex in parts_arg:
-    parts_answer.append(count_to_end(mapping, start_nodes_list, end_regex))
+parts_answer = [count_to_end(*pa) for pa in parts_arg]
 
 print('part1: ', parts_answer[0][0])
 
