@@ -1,6 +1,7 @@
 import collections
 from math import gcd
 import re
+
 X_real= [l.strip() for l in open('8-input')]
 X_test = [l.strip() for l in open('8-input-test')]
 
