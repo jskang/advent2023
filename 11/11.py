@@ -6,9 +6,6 @@ X_test = [l.strip() for l in open('input-test.txt')]
 
 L = X_real
 
-# find_expansion
-# Expand graph
-# find galaxies find distance
 expansion_row = []
 expansion_col = []
 
