@@ -80,37 +80,9 @@ def get_cycle(start_coord, pipe_map):
     return steps
 
    
-# def isCyclic_util(visited, node):
-#     if visited[node] == 2:
-#         return
-    
-#     if visited[node] == 1:
-#         v = []
-#         v.append(node)
-
-
-#     # while stack:
-#     #     node, prev = stack.pop()
-#     #     for neighbour in pipe_map[node]:
-#     #         if neighbour in prev:
-#     #             continue
-#     #         stack.append([neighbour, prev + [node]])
-#     #     temp.append(node)
-#     #     print("curr_cord", node, "previous", prev, "stack", stack)
-#     #     counter += 1
-
-
-
-#     colour = []
-
-
-#     return temp
-
 # Find loops
 # print(get_cycle('A', test_map))
 start_coord, pipe_map = parse_graph(L)
 # print(start_coord, pipe_map)
 print(get_cycle(start_coord, pipe_map))
 # print(set(visited_list))
-
-# traverse through the edges and print the largest path and divde by two?
